@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 
-from huggingface_hub import HfApi, hf_hub_download
+from huggingface_hub import HfApi, RepoFile, hf_hub_download
 
 
 @dataclass(frozen=True, slots=True)
@@ -34,6 +34,8 @@ def list_repository_files(
     )
     files: list[RepositoryFile] = []
     for entry in entries:
+        if not isinstance(entry, RepoFile):
+            continue
         path = getattr(entry, "path", None)
         if not path or not isinstance(path, str):
             continue
