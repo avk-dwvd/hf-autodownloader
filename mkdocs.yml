@@ -1,0 +1,15 @@
+site_name: hf-autodownloader
+site_description: Interactive selective downloads from Hugging Face repositories.
+docs_dir: docs
+site_dir: site
+theme:
+  name: mkdocs
+nav:
+  - Overview: index.md
+  - Getting started: getting-started.md
+  - Architecture: architecture.md
+  - Contributing: contributing.md
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
