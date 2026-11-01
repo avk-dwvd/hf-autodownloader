@@ -25,7 +25,10 @@ console = Console()
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="hf-autodownloader",
-        description="Interactively select files to download from a Hugging Face model repository.",
+        description=(
+            "Interactively select files to download from a "
+            "Hugging Face model repository."
+        ),
     )
     parser.add_argument(
         "repo_id",
@@ -46,7 +49,9 @@ def destination_for(parent: Path, repo_id: str) -> Path:
     directory_name = re.sub(r"[^A-Za-z0-9._-]+", "_", repo_id.strip().replace("/", "_"))
     directory_name = directory_name.strip("._-")
     if not directory_name or directory_name in {".", ".."}:
-        raise ValueError("Repository ID cannot be used as a destination directory name.")
+        raise ValueError(
+            "Repository ID cannot be used as a destination directory name."
+        )
     return parent.expanduser().resolve() / directory_name
 
 
@@ -56,8 +61,14 @@ def run(args: argparse.Namespace) -> int:
         console.print("[yellow]Cancelled.[/yellow]")
         return 130
     repo_id = repo_id.strip()
-    if not repo_id or "/" not in repo_id or any(part in {"", ".", ".."} for part in repo_id.split("/")):
-        console.print("[red]Enter a repository ID in owner/name form.[/red]", stderr=True)
+    if (
+        not repo_id
+        or "/" not in repo_id
+        or any(part in {"", ".", ".."} for part in repo_id.split("/"))
+    ):
+        console.print(
+            "[red]Enter a repository ID in owner/name form.[/red]", stderr=True
+        )
         return 2
 
     parent = args.parent_dir
@@ -96,7 +107,9 @@ def run(args: argparse.Namespace) -> int:
         destination,
         revision=args.revision,
     )
-    console.print(f"[green]Downloaded {len(downloaded)} file(s) to {destination}[/green]")
+    console.print(
+        f"[green]Downloaded {len(downloaded)} file(s) to {destination}[/green]"
+    )
     return 0
 
 
@@ -106,7 +119,9 @@ def main() -> int:
     try:
         return run(args)
     except KeyboardInterrupt:
-        console.print("\n[yellow]Interrupted. Already completed files were kept.[/yellow]")
+        console.print(
+            "\n[yellow]Interrupted. Already completed files were kept.[/yellow]"
+        )
         return 130
     except (HfHubHTTPError, OSError, ValueError) as error:
         console.print(f"[red]Error: {error}[/red]", stderr=True)

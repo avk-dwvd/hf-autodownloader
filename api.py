@@ -42,7 +42,9 @@ def list_repository_files(
         size = getattr(entry, "size", None)
         if size is None:
             size = getattr(getattr(entry, "lfs", None), "size", None)
-        files.append(RepositoryFile(path=path, size=size if isinstance(size, int) else None))
+        files.append(
+            RepositoryFile(path=path, size=size if isinstance(size, int) else None)
+        )
     return sorted(files, key=lambda item: item.path.casefold())
 
 

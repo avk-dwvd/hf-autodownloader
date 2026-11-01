@@ -78,9 +78,13 @@ def download_files(
                     tqdm_class=_rich_tqdm(progress, file_id),
                 )
             except BaseException:
-                progress.update(file_id, description=Text(f"Failed: {item.path}"), visible=True)
+                progress.update(
+                    file_id, description=Text(f"Failed: {item.path}"), visible=True
+                )
                 raise
-            actual_size = local_path.stat().st_size if local_path.exists() else item.size
+            actual_size = (
+                local_path.stat().st_size if local_path.exists() else item.size
+            )
             progress.update(file_id, total=actual_size, completed=actual_size or 0)
             paths.append(local_path)
             progress.advance(overall_id)

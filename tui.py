@@ -62,7 +62,8 @@ def select_repository_files(files: list[RepositoryFile]) -> list[RepositoryFile]
         start = page * PAGE_SIZE
         page_files = files[start : start + PAGE_SIZE]
         console.print(
-            f"\n[bold]Files {start + 1}–{start + len(page_files)} of {len(files)}[/bold] "
+            f"\n[bold]Files {start + 1}–{start + len(page_files)} "
+            f"of {len(files)}[/bold] "
             f"(page {page + 1}/{page_count})"
         )
         choices = [
@@ -90,7 +91,9 @@ def select_repository_files(files: list[RepositoryFile]) -> list[RepositoryFile]
             actions.append(Choice("Previous page", value="previous"))
         if page + 1 < page_count:
             actions.append(Choice("Next page", value="next"))
-        actions.append(Choice(f"Finish selection ({len(selected_paths)} selected)", value="finish"))
+        actions.append(
+            Choice(f"Finish selection ({len(selected_paths)} selected)", value="finish")
+        )
         action = questionary.select("Continue:", choices=actions).ask()
         if action is None:
             return None
