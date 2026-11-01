@@ -1,0 +1,3 @@
+huggingface_hub>=0.26
+questionary>=2.0
+rich>=13.7
