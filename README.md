@@ -46,3 +46,11 @@ git status
 ```
 
 Runtime dependencies use minimum supported versions in `requirements.txt`.
+
+## License
+
+hf-autodownloader is licensed under the [MIT License](LICENSE.md).
+
+You are free to use, modify, redistribute, and commercially use this software, provided that the original copyright and license notice are preserved.
+
+Copyright © 2026 [avk-dwvd](https://github.com/avk-dwvd).
