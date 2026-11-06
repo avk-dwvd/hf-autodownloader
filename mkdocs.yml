@@ -1,14 +1,21 @@
 site_name: hf-autodownloader
 site_description: Interactive selective downloads from Hugging Face repositories.
+
 docs_dir: docs
 site_dir: site
+
 theme:
   name: mkdocs
+
 nav:
   - Overview: index.md
   - Getting started: getting-started.md
   - Architecture: architecture.md
   - Contributing: contributing.md
+  - License: license.md
+
+copyright: Copyright © 2026 avk-dwvd · MIT License
+
 markdown_extensions:
   - admonition
   - toc:
